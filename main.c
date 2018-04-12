@@ -26,6 +26,7 @@ void main (void){
    printf("Hola Mundo\n");//Puedes usar putc o printf. Revisa la documentación de CCS para ver que mas puedes hacer.
 #endif
    int opcion = 0x00;
+   signed long resultado = 0x00;
    while(1){
       if(input(PIN_B4)== 0x01){
          opcion = 0x01;
@@ -38,7 +39,39 @@ void main (void){
       } 
       else if (input(PIN_B7) == 0x01){
          opcion = 0x04;
-      } 
+      }
+      
+      switch(opcion){
+         case 0x01:
+            resultado = (long)input_c() + (long)input_d();
+            opcion = 0x00;
+            break;
+         case RESTA:
+            resultado = (long)input_c() - (long)input_d();
+            opcion = 0x00;
+            break; 
+         case MULTI: 
+            resultado = (long)input_c() * (long)input_d();
+            if (resultado > 0x1FFF){
+               rutinaDeError();
+               opcion = 0x00;
+               break;
+            }
+            else
+               opcion = 0x00;
+               break;
+         case DIVISION:
+            if((long)input_d() == 0){
+               rutinaDeError();
+               opcion = 0x00;
+               break;
+            }
+            else{
+               resultado = (long)input_c() / (long)input_d();
+               opcion = 0x00;
+               break;
+           }
+       }
       
    }
 }	
