@@ -26,6 +26,9 @@ void main (void){
    signed long resultado = 0x00;
    while(1){
       
+       output_a(resultado);
+       output_b(resultado >> 6 );
+       output_e(resultado >> 10);
    }
 }	
 void rutinaDeError(){
