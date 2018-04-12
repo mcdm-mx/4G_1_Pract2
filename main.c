@@ -11,6 +11,7 @@
    #use fast_io(c)
 #endif
 
+void rutinaDeError();
 void main (void){
    setup_oscillator(OSC_16MHZ);
 #ifdef __DEBUG_SERIAL__ //Deberiamos de proteger nuestras depuraciones de esta forma o usar una macro ya protegida.
@@ -27,3 +28,16 @@ void main (void){
       
    }
 }	
+void rutinaDeError(){
+    for(int i = 0 ; i < 5 ; i++){
+        output_a(0xFF);
+        output_b(0x0F);
+        output_e(0x07);
+        delay_ms(150);
+        output_a(0x00);
+        output_b(0x00);
+        output_e(0x00);
+        delay_ms(150);
+    }
+}
+
