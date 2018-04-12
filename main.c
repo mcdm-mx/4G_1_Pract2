@@ -8,6 +8,10 @@
 #use fast_io(d)
 #use fast_io(e)
 
+#define SUMA 0x01
+#define RESTA 0x02
+#define MULTI 0X03
+#define DIVISION 0X04
 //#define __DEBUG_SERIAL__ //Si comentas esta linea se deshabilita el debug por serial y el PIN_C6 puede ser usado en forma digital I/O
 
 #ifdef __DEBUG_SERIAL__
