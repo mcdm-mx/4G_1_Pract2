@@ -8,10 +8,10 @@
 #use fast_io(d)
 #use fast_io(e)
 
-#define SUMA 0x01
-#define RESTA 0x02
-#define MULTI 0X03
-#define DIVISION 0X04
+#define __SUMA__ 0x01
+#define __RESTA__ 0x02
+#define __MULTI__ 0X03
+#define __DIVISION__ 0X04
 
 //#define __DEBUG_SERIAL__ //Si comentas esta linea se deshabilita el debug por serial y el PIN_C6 puede ser usado en forma digital I/O
 
@@ -37,28 +37,28 @@ void main (void){
    signed long resultado = 0x00;
    while(1){
       if(input(PIN_B4)== 0x01){
-         opcion = 0x01;
+         opcion = __SUMA__;
       }
       else if (input(PIN_B5) == 0x01){
-         opcion = 0x02;
+         opcion = __RESTA__;
       }
       else if (input(PIN_B6) == 0x01){
-         opcion = 0x03;
+         opcion = __MULTI__;
       } 
       else if (input(PIN_B7) == 0x01){
-         opcion = 0x04;
+         opcion = __DIVISION__;
       }
       
       switch(opcion){
-         case SUMA:
+         case __SUMA__:
             resultado = (long)input_c() + (long)input_d();
             opcion = 0x00;
             break;
-         case RESTA:
+         case __RESTA__:
             resultado = (long)input_c() - (long)input_d();
             opcion = 0x00;
             break; 
-         case MULTI: 
+         case __MULTI__: 
             resultado = (long)input_c() * (long)input_d();
             if (resultado > 0x1FFF){
                rutinaDeError();
@@ -68,7 +68,7 @@ void main (void){
             else
                opcion = 0x00;
                break;
-         case DIVISION:
+         case __DIVISION__:
             if((long)input_d() == 0){
                rutinaDeError();
                opcion = 0x00;
@@ -87,15 +87,15 @@ void main (void){
    }
 }   
 void rutinaDeError(){
-    for(int i = 0 ; i < 3 ; i++){
-        output_a(0xFF);
-        output_b(0x0F);
-        output_e(0x07);
-        delay_ms(50);
-        output_a(0x00);
-        output_b(0x00);
-        output_e(0x00);
-        delay_ms(50);
-    }
+   for(int i = 0 ; i < 3 ; i++){
+      output_a(0xFF);
+      output_b(0x0F);
+      output_e(0x07);
+      delay_ms(50);
+      output_a(0x00);
+      output_b(0x00);
+      output_e(0x00);
+      delay_ms(50);
+   }
 }
 
